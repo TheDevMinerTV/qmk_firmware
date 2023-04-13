@@ -12,3 +12,18 @@ Edit the `config.h` to have the correct option for the keyboard half as on some 
 -   Removed Colemak
 -   Added Game mode (shifts left keyboard half by one key to the right)
 -   OLED screen is disabled, you can enable it again though, it increases the latency a bit, though
+
+## Commands:
+
+### Build:
+
+```shell
+make sofle:devminer
+```
+The resulting `.hex` file will be in `.build/sofle_rev1_devminer.hex`.
+
+### Flash:
+
+```shell
+make sofle:devminer:avrdude
+```
