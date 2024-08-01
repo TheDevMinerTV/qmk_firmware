@@ -6,4 +6,3 @@ for more options.
 */
 
 #define MASTER_RIGHT
-// #define MASTER_LEFT
