@@ -7,20 +7,22 @@
 - Swapped <kbd>Enter</kbd> and <kbd>Space</kbd>
 - Removed Colemak
 - Added Game mode (shifts left keyboard half by one key to the right)
-- OLED screen is disabled, you can enable it again though, it increases the latency a bit, though
+- OLED screen is disabled for lower latency
 - VSCode debugger hotkeys
 
 ## Commands
 
-### Build:
+### Build
+
 ```shell
-make sofle:devminer
+make sofle/devminer:devminer
 ```
 
-The resulting `.hex` file will be in `.build/sofle_rev1_devminer.hex`.
+The resulting `.hex` file will be in `.build/sofle_devminer_devminer.hex`.
 
 ### Flash
 
 ```shell
-make sofle:devminer:avrdude
+qmk flash -kb sofle/devminer -km devminer -bl avrdude-split-left
+qmk flash -kb sofle/devminer -km devminer -bl avrdude-split-right
 ```

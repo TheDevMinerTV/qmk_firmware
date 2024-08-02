@@ -6,3 +6,8 @@ for more options.
 */
 
 #define MASTER_RIGHT
+
+#define ENCODERS_PAD_A { F5 }
+#define ENCODERS_PAD_B { F4 }
+#define ENCODER_RESOLUTIONS { 4 }
+#define ENCODER_RESOLUTIONS_RIGHT { 2 }
