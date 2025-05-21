@@ -3,6 +3,7 @@
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
+    _NUMPAD,
     _GAME,
     _LOWER,
     _RAISE,
@@ -12,6 +13,7 @@ enum sofle_layers {
 enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
     KC_GAME,
+    KC_NUMPAD,
     KC_PRVWD,
     KC_NXTWD,
     KC_LSTRT,
@@ -32,12 +34,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_LGUI, KC_LALT, KC_LCTL, MO(_LOWER), KC_SPC,         KC_ENT, MO(_RAISE), KC_RCTL, KC_RALT, KC_RGUI
 ),
 
+[_NUMPAD] = LAYOUT(
+  KC_NO,   KC_NUM, KC_NO,   KC_NO,   KC_NO,   KC_SLSH,                         KC_NO, KC_NO,   KC_NO,   KC_NO,  KC_NO, KC_NO,
+  KC_ESC,  KC_INS, KC_KP_7, KC_KP_8, KC_KP_9, KC_ASTR,                         KC_NO, KC_NO,   KC_NO,   KC_NO,  KC_NO, KC_NO,
+  KC_TAB,  KC_NO,  KC_KP_4, KC_KP_5, KC_KP_6, KC_MINS,                         KC_NO, KC_NO,   KC_NO,   KC_NO,  KC_NO, KC_NO,
+  KC_LSFT, KC_NO,  KC_KP_1, KC_KP_2, KC_KP_3, KC_PLUS, TO(_QWERTY),   _______, KC_NO, KC_NO,   KC_NO,   KC_NO,  KC_NO, KC_NO,
+                   _______, _______, _______, KC_NO,   _______,       _______, KC_NO, _______, _______, _______
+),
+
 [_GAME] = LAYOUT(
-  KC_ESC, KC_1,    KC_2,    KC_3,    KC_4, KC_5,                               KC_6,       KC_7,    KC_8,    KC_9,   KC_0,    KC_GRV,
-  KC_F13, KC_TAB,  KC_Q,    KC_W,    KC_E, KC_R,                               KC_J,       KC_L,    KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
-  KC_F14, KC_LSFT, KC_A,    KC_S,    KC_D, KC_F,                               KC_H,       KC_N,    KC_E,    KC_I,   KC_O,    KC_QUOT,
-  KC_F15, KC_LCTL, KC_Z,    KC_X,    KC_C, KC_M,       KC_MUTE,        KC_F24, KC_K,       KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                   KC_LGUI, KC_LALT, KC_V, MO(_LOWER), KC_SPC,         KC_ENT, MO(_RAISE), KC_RCTL, KC_RALT, KC_RGUI
+  KC_ESC, KC_1,    KC_2,    KC_3,    KC_4, KC_5,                                KC_6,       KC_7,    KC_8,    KC_9,   KC_0,    KC_GRV,
+  KC_F13, KC_TAB,  KC_Q,    KC_W,    KC_E, KC_R,                                KC_J,       KC_L,    KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
+  KC_F14, KC_LSFT, KC_A,    KC_S,    KC_D, KC_F,                                KC_H,       KC_N,    KC_E,    KC_I,   KC_O,    KC_QUOT,
+  KC_F15, KC_LCTL, KC_Z,    KC_X,    KC_C, KC_M,       KC_MUTE,         KC_F24, KC_K,       KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                   KC_LGUI, KC_LALT, KC_V, MO(_LOWER), KC_SPC,          KC_ENT, MO(_RAISE), KC_RCTL, KC_RALT, KC_RGUI
 ),
 
 [_LOWER] = LAYOUT(
@@ -57,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ADJUST] = LAYOUT(
-  QK_BOOT, KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,                            KC_NO,   KC_NO,   KC_NO,   KC_NO,       KC_NO, CG_TOGG,
-  KC_CAPS, KC_QWERTY, KC_GAME, KC_NO,   KC_NO,   KC_NO,                            KC_F6,   KC_NO,   KC_NO,   C(S(KC_F8)), KC_NO, KC_DLINE,
-  KC_NO,   KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,                            KC_NO,   KC_VOLD, KC_MUTE, KC_VOLU,     KC_NO, KC_NO,
-  KC_NO,   KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,          KC_NO,   KC_NO,   KC_MPRV, KC_MPLY, KC_MNXT,     KC_NO, KC_NO,
-                      _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______
+  QK_BOOT, KC_NO,     KC_NO,   KC_NO,     KC_NO,   KC_NO,                            KC_NO,   KC_NO,   KC_NO,   KC_NO,       KC_NO, CG_TOGG,
+  KC_CAPS, KC_QWERTY, KC_GAME, KC_NUMPAD, KC_NO,   KC_NO,                            KC_F6,   KC_NO,   KC_NO,   C(S(KC_F8)), KC_NO, KC_DLINE,
+  KC_NO,   KC_NO,     KC_NO,   KC_NO,     KC_NO,   KC_NO,                            KC_NO,   KC_VOLD, KC_MUTE, KC_VOLU,     KC_NO, KC_NO,
+  KC_NO,   KC_NO,     KC_NO,   KC_NO,     KC_NO,   KC_NO,   KC_NO,          KC_NO,   KC_NO,   KC_MPRV, KC_MPLY, KC_MNXT,     KC_NO, KC_NO,
+                      _______, _______,   _______, _______, _______,        _______, _______, _______, _______, _______
 )
 };
 
@@ -79,6 +89,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_GAME:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_GAME);
+            }
+            return false;
+        case KC_NUMPAD:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_NUMPAD);
             }
             return false;
         case KC_PRVWD:
